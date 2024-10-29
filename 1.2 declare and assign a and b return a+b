@@ -1,0 +1,22 @@
+	.section	__TEXT,__text,regular,pure_instructions
+	.build_version macos, 14, 0	sdk_version 15, 0
+	.globl	_main                           ; -- Begin function main
+	.p2align	2
+_main:                                  ; @main
+	.cfi_startproc
+; %bb.0:
+	sub	sp, sp, #16 ;starting 
+	.cfi_def_cfa_offset 16
+	str	wzr, [sp, #12]
+	mov	w8, #5        ;assign 5 in to a w8 register            
+	str	w8, [sp, #8]  ;store w8 register in #8 memory slot
+	mov	w8, #3        ;assign 3 in to a w8 register
+	str	w8, [sp, #4]  ;store w8 register in the #4 memory slot	
+	ldr	w8, [sp, #8]  ;call #8 memory slots data to a w8 register
+	ldr	w9, [sp, #4]  ;call #4 memory slots data to a w9 register
+	add	w0, w8, w9	  ;add w8 and w9 then write them in to a w0
+	add	sp, sp, #16 
+	ret ;natively return w0 you can write this like ret {Wn}
+	.cfi_endproc
+                                        ; -- End function
+.subsections_via_symbols
